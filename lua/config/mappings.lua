@@ -37,8 +37,8 @@ end, { noremap = true, silent = true })
 -- buffer line
 -- Переключение на следующий буфер по Tab (в normal и terminal режиме)
 
-set("n", "<Leader>bn", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
-set("n", "<Leader>bp", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+set("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
 set("n", "<leader>c", "<cmd>bdelete<CR>", { desc = "Закрыть текущий буфер" })
 
 set("t", "<Tab>", "<Tab>", { noremap = true, silent = true })

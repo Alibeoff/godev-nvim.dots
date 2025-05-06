@@ -14,8 +14,5 @@ return {
         },
       },
     })
-    -- Опционально: свои маппинги для переключения буферов
-    vim.keymap.set("n", "<Leader>bn", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
-    vim.keymap.set("n", "<Leader>bp", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
   end,
 }
