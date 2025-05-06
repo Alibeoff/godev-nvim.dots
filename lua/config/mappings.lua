@@ -69,5 +69,3 @@ set('n', '<C-j>', ':move .+1<CR>', { noremap = true, silent = true })
 set('v', '<C-j>', ":move '>+1<CR>gv=gv", { noremap = true, silent = true })
 set('n', '<C-k>', ':move .-2<CR>', { noremap = true, silent = true })
 set('v', '<C-k>', ":move '<-2<CR>gv=gv", { noremap = true, silent = true })
--- global copying
-set('v', 'gy', ':OSCYank<CR>', { noremap = true, silent = true })
