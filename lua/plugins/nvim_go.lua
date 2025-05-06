@@ -6,13 +6,11 @@ return {
     config = function()
       require("go").setup()
 
-      local format_sync_grp = vim.api.nvim_create_augroup("GoFormatNormal", {})
-      vim.api.nvim_create_autocmd("ModeChanged", {
-        pattern = "i:n",
+      local format_sync_grp = vim.api.nvim_create_augroup("GoFormatOnSave", {})
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = { "*.go", "go.mod" },
         callback = function()
-          if vim.bo.filetype == "go" then
-            require('go.format').gofmt()
-          end
+          require('go.format').gofmt()
         end,
         group = format_sync_grp,
       })
