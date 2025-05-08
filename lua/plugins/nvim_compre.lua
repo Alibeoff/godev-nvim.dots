@@ -15,7 +15,7 @@ return {
     -- Настройка nvim-cmp
     local cmp = require('cmp')
     cmp.setup({
-      sources = {
+        sources = {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
         { name = 'path' },
@@ -51,7 +51,7 @@ return {
           end
         end, { 'i', 's' }),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['<S-Leader>'] = cmp.mapping(function()
+        ['ll'] = cmp.mapping(function()
           if not cmp.visible() then
             cmp.complete()
           end
