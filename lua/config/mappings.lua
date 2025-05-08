@@ -68,5 +68,6 @@ set('n', '<C-j>', ':move .+1<CR>', { noremap = true, silent = true })
 set('v', '<C-j>', ":move '>+1<CR>gv=gv", { noremap = true, silent = true })
 set('n', '<C-k>', ':move .-2<CR>', { noremap = true, silent = true })
 set('v', '<C-k>', ":move '<-2<CR>gv=gv", { noremap = true, silent = true })
-
-vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { desc = 'LSP Code Action' })
+-- Go NVIM packages 
+-- go get - sd
+set('n', 'sm', ':GoModTidy<CR>', { desc = 'Run GoModTidy' })
