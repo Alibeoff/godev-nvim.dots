@@ -4,7 +4,6 @@ local telescope_builtin = require('telescope.builtin')
 set('n', '<leader>ff', telescope_builtin.find_files, { desc = 'Telescope find files' })
 set('n', '<leader>fw', telescope_builtin.live_grep, { desc = 'Telescope find words' })
 set('n', '<leader>fb', telescope_builtin.buffers, { desc = 'Telescope buffers' })
-
 -- Commenting
 set("n", "<leader>/", "gcc", {desc = "Comment line", remap = true})
 set("v", "<leader>/", "gc", {desc = "Comment lines", remap = true})
@@ -69,3 +68,5 @@ set('n', '<C-j>', ':move .+1<CR>', { noremap = true, silent = true })
 set('v', '<C-j>', ":move '>+1<CR>gv=gv", { noremap = true, silent = true })
 set('n', '<C-k>', ':move .-2<CR>', { noremap = true, silent = true })
 set('v', '<C-k>', ":move '<-2<CR>gv=gv", { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { desc = 'LSP Code Action' })
