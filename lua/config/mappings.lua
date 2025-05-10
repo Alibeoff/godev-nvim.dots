@@ -1,4 +1,14 @@
 local set = vim.keymap.set
+local builtin = require('telescope.builtin')
+
+
+-- LSP
+-- Кеймап sge для показа ошибок через Telescope
+set('n', 'se', vim.diagnostic.open_float, { desc = "Show LSP diagnostic message" })
+set('n', 'sge', function()
+  require('telescope.builtin').diagnostics()
+end, { desc = "Show all LSP diagnostics with Telescope" })
+set("n", "sl", "<cmd>SymbolsOutline<CR>", { desc = "Toggle Symbols Outline" })
 -- Telescope
 local telescope_builtin = require('telescope.builtin')
 set('n', '<leader>ff', telescope_builtin.find_files, { desc = 'Telescope find files' })
@@ -76,3 +86,5 @@ set('n', 'sm', ':GoModTidy<CR>', { desc = 'Run GoModTidy' })
 set('n', 'ss', function()
   sayhe()
 end)
+
+
