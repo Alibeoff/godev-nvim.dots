@@ -69,5 +69,10 @@ set('v', '<C-j>', ":move '>+1<CR>gv=gv", { noremap = true, silent = true })
 set('n', '<C-k>', ':move .-2<CR>', { noremap = true, silent = true })
 set('v', '<C-k>', ":move '<-2<CR>gv=gv", { noremap = true, silent = true })
 -- Go NVIM packages 
--- go get - sd
 set('n', 'sm', ':GoModTidy<CR>', { desc = 'Run GoModTidy' })
+-- go get - sd
+
+-- SCRIPTS 
+set('n', 'ss', function()
+  sayhe()
+end)

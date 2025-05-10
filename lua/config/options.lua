@@ -2,6 +2,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.o.laststatus = 3
 
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwfile = 1
+
 vim.o.clipboard = "unnamedplus"
 vim.o.cursorline = true
 vim.o.cursorlineopt = "number"
