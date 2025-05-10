@@ -23,6 +23,9 @@ set("i", "jj", "<Esc>", { noremap = true, silent = true })
 
 set("n", "<leader>w", "<cmd>w<CR>", { noremap = true, silent = true })
 set("n", "<leader>q", "<cmd>q<CR>", { noremap = true, silent = true })
+--Vision Mode
+set('v', '<Tab>', '>gv', { noremap = true, silent = true })
+set('v', '<S-Tab>', '<gv', { noremap = true, silent = true })
 -- Терминал будет переключаться по <Space>tf и F7 - file term.lua
 --Nvim.GO =}>=}>
 set("n", "gt", "<cmd>GoAddTag<CR>", {desc = "Add Tag", silent = true}) 
