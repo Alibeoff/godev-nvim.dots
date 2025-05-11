@@ -1,7 +1,13 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = "User FilePost",
+    event = "VeryLazy",
+    config = function()
+    vim.keymap.set("n", "sa", function()
+      vim.lsp.buf.code_action({ filters = { include = { "source.addImport", "source.OrganizeImports" }, } })
+    end, { desc = "Go: Organize Imports" })
+  end,
+
   },
   {
     "williamboman/mason.nvim",

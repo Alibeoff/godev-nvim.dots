@@ -1,5 +1,5 @@
 
-local function load_plugins_from_folder(folder)
+local function load_scripts_from_folder(folder)
   local scan = vim.loop.fs_scandir
   local function scandir(path)
     local fd = scan(path)
@@ -28,4 +28,4 @@ local function load_plugins_from_folder(folder)
 end
 
 -- Использование:
-load_plugins_from_folder("scripts")
+load_scripts_from_folder("scripts")

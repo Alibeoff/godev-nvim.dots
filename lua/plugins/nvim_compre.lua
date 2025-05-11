@@ -9,9 +9,6 @@ return {
     "ray-x/go.nvim",
   },
   config = function()
-    -- Настройка LSP для Go (gopls)
-    require('lspconfig').gopls.setup({})
-
     -- Настройка nvim-cmp
     local cmp = require('cmp')
     cmp.setup({
