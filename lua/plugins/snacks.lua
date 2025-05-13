@@ -57,6 +57,7 @@ return {
   keys = {
     { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
     { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+    { "gd", function() Snacks.picker.lsp_definitions() end, nowait = true, desc = "Goto Definition" },
     {
      ";;",
       function() Snacks.terminal() end,
