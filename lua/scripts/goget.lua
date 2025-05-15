@@ -1,4 +1,4 @@
-function sayhe()
+function goget()
   vim.cmd('normal yi"')
   local clipboard_content = vim.fn.getreg('+') 
   local output = vim.fn.system('go get ' .. clipboard_content)
