@@ -1,7 +1,6 @@
 local set = vim.keymap.set
 local builtin = require('telescope.builtin')
 
-
 -- LSP
 -- Кеймап sge для показа ошибок через Telescope
 set('n', 'se', vim.diagnostic.open_float, { desc = "Show LSP diagnostic message" })

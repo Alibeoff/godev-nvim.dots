@@ -71,7 +71,7 @@
 | `sd`           | Telescope window to search/install Go package |
 | `ss`           | Auto install Go package in focus              |
 | `;s`           | Telescope to run your Go files                |
-| `rs`           | Rename word throughout all project            |
+| `sr`           | Rename word throughout all project            |
 
 ---
 
