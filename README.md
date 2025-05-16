@@ -1,3 +1,8 @@
+### Getting Started
+At the moment, having looked at and tried personal NeoVim configs for development in the Go language published by YouTubers in GitHub, there is no immediately convenient working config that meets my needs. That is why below is a description of my personal config for working with Golang
+
+---
+
 ## Mappings
 
 | Shortcut         | Description                         | Mode           |
