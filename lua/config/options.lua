@@ -1,7 +1,11 @@
+
+local o = vim.opt
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.o.laststatus = 3
 
+o.lazyredraw = true
+o.ttyfast = true
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwfile = 1
