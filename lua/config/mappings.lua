@@ -22,6 +22,12 @@ set("i", "jj", "<Esc>", { noremap = true, silent = true })
 
 set("n", "<leader>w", "<cmd>w<CR>", { noremap = true, silent = true })
 set("n", "<leader>q", "<cmd>q<CR>", { noremap = true, silent = true })
+
+set('t', 'cc', function()
+  -- Отправляем Ctrl+C в терминал, не выходя из терминального режима
+  local keys = vim.api.nvim_replace_termcodes("<C-c>", true, false, true)
+  vim.api.nvim_feedkeys(keys, 'n', false)
+end, { noremap = true, silent = true })
 --Vision Mode
 set('v', '<Tab>', '>gv', { noremap = true, silent = true })
 set('v', '<S-Tab>', '<gv', { noremap = true, silent = true })
@@ -70,10 +76,13 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Positions
 -- Переход в начало строки (0)
 set('n', 'ms', '0', { desc = 'Move to start of line' })
+set('v', 'ms', '0', { desc = 'Move to start of line' })
 -- Переход на первый непробельный символ (^)
 set('n', 'ml', '^', { desc = 'Move to first non-blank of line' })
+set('v', 'ml', '^', { desc = 'Move to first non-blank of line' })
 -- Переход в конец строки ($)
 set('n', 'mc', '$', { desc = 'Move to end of line' })
+set('v', 'mc', '$', { desc = 'Move to end of line' })
 -- Strings Move
 set('n', '<C-j>', ':move .+1<CR>', { noremap = true, silent = true })
 set('v', '<C-j>', ":move '>+1<CR>gv=gv", { noremap = true, silent = true })
