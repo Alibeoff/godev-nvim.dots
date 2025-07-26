@@ -24,7 +24,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = {
-      ensure_installed = { "lua_ls", "gopls", "jsonls", "yamlls", "dockerls", "docker_compose_language_service" },
+      ensure_installed = { "lua_ls", "gopls", "jsonls", "yamlls", "dockerls", "cssls", "html", "docker_compose_language_service" },
       handlers = {
         function (server_name)
           require("lspconfig")[server_name].setup({})
