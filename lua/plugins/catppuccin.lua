@@ -3,76 +3,179 @@ return {
   name = "catppuccin",
   priority = 1000,
   lazy = false,
+  
+  -- Опции для настройки Catppuccin
   opts = {
-    flavour = "mocha",
+    flavour = "mocha", -- Указываем вариант темы
     transparent_background = true,
     show_end_of_buffer = false,
     
+    -- Интеграции с плагинами
     integrations = {
       cmp = true,
       gitsigns = true,
       nvimtree = true,
       telescope = {
         enabled = true,
-        style = "nvchad", -- или "classic"
+        style = "nvchad",
       },
       treesitter = true,
       which_key = true,
       mason = true,
       notify = true,
-      neotree = true,
+      neotree = {
+        enabled = true,
+        show_root = true,
+        transparent_panel = true,
+      },
       neotest = true,
       dap = true,
       dap_ui = true,
-    }
-  },
-  config = function(_, opts)
-    require("catppuccin").setup(opts)
-    vim.cmd.colorscheme("catppuccin-mocha")
+      native_lsp = {
+        enabled = true,
+        virtual_text = {
+          errors = { "italic" },
+          hints = { "italic" },
+          warnings = { "italic" },
+          information = { "italic" },
+        },
+        underlines = {
+          errors = { "underline" },
+          hints = { "underline" },
+          warnings = { "underline" },
+          information = { "underline" },
+        },
+        inlay_hints = {
+          background = true,
+        },
+      },
+    },
     
-    -- Принудительная прозрачность после загрузки
+    -- Дополнительные стили
+    styles = {
+      comments = { "italic" },
+      conditionals = { "italic" },
+      loops = {},
+      functions = {},
+      keywords = {},
+      strings = {},
+      variables = {},
+      numbers = {},
+      booleans = {},
+      properties = {},
+      types = {},
+      operators = {},
+    },
+    
+    -- Кастомные хайлайты
+    custom_highlights = function(colors)
+      return {
+        -- Кастомные бордеры
+        FloatBorder = { fg = colors.blue },
+        TelescopeBorder = { fg = colors.blue },
+        TelescopePromptBorder = { fg = colors.blue },
+        TelescopeResultsBorder = { fg = colors.blue },
+        TelescopePreviewBorder = { fg = colors.blue },
+        DiagnosticFloatingBorder = { fg = colors.blue },
+        LspInfoBorder = { fg = colors.blue },
+        
+        -- Кастомные фоны для плавающих окон
+        TelescopeNormal = { bg = colors.mantle },
+        TelescopePromptNormal = { bg = colors.mantle },
+        TelescopeResultsNormal = { bg = colors.mantle },
+        TelescopePreviewNormal = { bg = colors.mantle },
+        
+        -- Лучшие настройки для прозрачности
+        NormalFloat = { bg = "none" },
+        FloatTitle = { bg = "none" },
+        FloatFooter = { bg = "none" },
+        
+        -- Разделители окон
+        WinSeparator = { fg = colors.surface2 },
+        VertSplit = { fg = colors.surface2 },
+        
+        -- Строка статуса
+        StatusLine = { bg = "none" },
+        StatusLineNC = { bg = "none" },
+        
+        -- Номера строк
+        LineNr = { fg = colors.overlay0 },
+        CursorLineNr = { fg = colors.lavender },
+        
+        -- Символы в конце буфера
+        EndOfBuffer = { fg = colors.base },
+      }
+    end,
+  },
+  
+  -- Конфигурация
+  config = function(_, opts)
+    -- 1. Сначала настраиваем Catppuccin
+    require("catppuccin").setup(opts)
+    
+    -- 2. Устанавливаем цветовую схему
+    vim.cmd.colorscheme("catppuccin")
+    
+    -- 3. После загрузки темы применяем дополнительные настройки прозрачности
     vim.schedule(function()
-      -- Основные группы
-      vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-      vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+      -- Основные группы для полной прозрачности
+      local transparent_groups = {
+        "Normal", "NormalNC", "NormalFloat", "FloatBorder",
+        "FloatTitle", "FloatFooter", "StatusLine", "StatusLineNC",
+        "WinSeparator", "VertSplit", "LineNr", "CursorLineNr",
+        "EndOfBuffer", "Pmenu", "PmenuSbar", "PmenuThumb",
+        "TelescopeNormal", "TelescopeBorder", "TelescopePromptBorder",
+        "TelescopeResultsBorder", "TelescopePreviewBorder",
+        "DiagnosticFloatingBorder", "LspInfoBorder",
+        "NotifyINFOBorder", "NotifyWARNBorder", "NotifyDEBUGBorder",
+        "NotifyERRORBorder", "NvimTreeNormal", "NvimTreeNormalNC",
+        "NvimTreeEndOfBuffer", "MasonNormal", "WhichKeyFloat",
+      }
       
-      -- Терминал и флоат-окна
-      vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none", fg = "#89b4fa" })
-      vim.api.nvim_set_hl(0, "FloatTitle", { bg = "none" })
-      vim.api.nvim_set_hl(0, "FloatFooter", { bg = "none" })
+      for _, group in ipairs(transparent_groups) do
+        local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+        hl.bg = hl.bg and "none" or nil
+        vim.api.nvim_set_hl(0, group, hl)
+      end
       
-      -- Рамки окон
-      vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none", fg = "#585b70" })
-      vim.api.nvim_set_hl(0, "VertSplit", { bg = "none", fg = "#585b70" })
+      -- Специальные настройки для Pmenu
+      vim.api.nvim_set_hl(0, "PmenuSel", {
+        bg = opts.integrations.native_lsp.enabled and "#585b70" or "#313244",
+        fg = "none",
+      })
       
-      -- Строка статуса (если не используете lualine)
-      vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
-      vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "none" })
+      -- Убедимся, что Treesitter использует наши цвета
+      if opts.integrations.treesitter then
+        vim.api.nvim_set_hl(0, "@variable", { fg = opts.flavour == "mocha" and "#cdd6f4" or "#4c4f69" })
+        vim.api.nvim_set_hl(0, "@function", { fg = opts.flavour == "mocha" and "#89b4fa" or "#1e66f5" })
+        vim.api.nvim_set_hl(0, "@keyword", { fg = opts.flavour == "mocha" and "#cba6f7" or "#8839ef" })
+      end
       
-      -- Номера строк
-      vim.api.nvim_set_hl(0, "LineNr", { bg = "none", fg = "#6c7086" })
-      vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none", fg = "#f5c2e7" })
-      
-      -- Символы в конце буфера
-      vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none", fg = "#1e1e2e" })
-      
-      -- Дополнительные группы для плагинов
-      vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
-      vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none", fg = "#89b4fa" })
-      vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = "none", fg = "#89b4fa" })
-      vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = "none", fg = "#89b4fa" })
-      vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = "none", fg = "#89b4fa" })
-      
-      -- Для LSP и диагностики
-      vim.api.nvim_set_hl(0, "DiagnosticFloatingBorder", { bg = "none", fg = "#89b4fa" })
-      vim.api.nvim_set_hl(0, "LspInfoBorder", { bg = "none", fg = "#89b4fa" })
-      
-      -- Для всплывающего меню
-      vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" })
-      vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#585b70" })
-      vim.api.nvim_set_hl(0, "PmenuSbar", { bg = "none" })
-      vim.api.nvim_set_hl(0, "PmenuThumb", { bg = "#89b4fa" })
+      -- Для Go-разработки - дополнительные хайлайты
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "go",
+        callback = function()
+          vim.api.nvim_set_hl(0, "goBuiltins", { fg = "#f38ba8", italic = true })
+          vim.api.nvim_set_hl(0, "goFunctionCall", { fg = "#89b4fa" })
+          vim.api.nvim_set_hl(0, "goType", { fg = "#f9e2af" })
+          vim.api.nvim_set_hl(0, "goStructDef", { fg = "#fab387" })
+        end,
+      })
     end)
+  end,
+  
+  -- Инициализация перед загрузкой
+  init = function()
+    -- Устанавливаем глобальные переменные ДО загрузки плагина
+    vim.g.catppuccin_flavour = "mocha"
+    
+    -- Предотвращаем мигание при загрузке
+    vim.api.nvim_create_autocmd("VimEnter", {
+      once = true,
+      callback = function()
+        vim.cmd("highlight Normal guibg=NONE ctermbg=NONE")
+        vim.cmd("highlight NormalFloat guibg=NONE ctermbg=NONE")
+      end,
+    })
   end,
 }
