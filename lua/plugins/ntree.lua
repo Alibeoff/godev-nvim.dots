@@ -42,6 +42,11 @@ return {
         vim.keymap.set("n", "hh", function()
           api.node.navigate.parent_close()
         end, { buffer = args.buf, noremap = true, silent = true })
+        
+                -- . - переключить показ скрытых файлов
+        vim.keymap.set("n", ",", function()
+          api.tree.change_root_to_node(api.tree.get_node_under_cursor())
+        end, { buffer = args.buf, noremap = true, silent = true })
 
         -- <Leader>h - переключить показ скрытых файлов
         vim.keymap.set("n", "<Leader>h", function()

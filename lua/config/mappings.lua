@@ -5,7 +5,7 @@ local builtin = require('telescope.builtin')
 -- Кеймап sge для показа ошибок через Telescope
 set('n', 'se', vim.diagnostic.open_float, { desc = "Show LSP diagnostic message" })
 set('n', 'sge', function()
-require('telescope.builtin').diagnostics()
+  require('telescope.builtin').diagnostics()
 end, { desc = "Show all LSP diagnostics with Telescope" })
 set("n", "sl", "<cmd>SymbolsOutline<CR>", { desc = "Toggle Symbols Outline" })
 -- Telescope
@@ -20,7 +20,18 @@ set("v", "<leader>/", "gc", {desc = "Comment lines", remap = true})
 -- Normal Mode
 set("i", "jj", "<Esc>", { noremap = true, silent = true })
 
-set("n", "<leader>w", "<cmd>w<CR>", { noremap = true, silent = true })
+set("n", "<leader>w", function()
+  -- Сначала сохраняем файл
+  vim.cmd("w")
+  local filetype = vim.bo.filetype
+  if filetype ~= "go" and filetype ~= "" then
+    -- Форматируем с использованием переменной типа файла
+    vim.cmd("Neoformat " .. filetype)
+    vim.cmd("w")
+  end
+
+end, { noremap = true, silent = true})
+
 set("n", "<leader>q", "<cmd>q<CR>", { noremap = true, silent = true })
 
 set('t', 'cc', function()
@@ -32,8 +43,8 @@ end, { noremap = true, silent = true })
 set('v', '<Tab>', '>gv', { noremap = true, silent = true })
 set('v', '<S-Tab>', '<gv', { noremap = true, silent = true })
 --Nvim.GO =}>=}>
-set("n", "gt", "<cmd>GoAddTag<CR>", {desc = "Add Tag", silent = true}) 
-set("n", "gm", "<cmd>GoRmTag<CR>", {desc = "Add Tag", silent = true}) 
+set("n", "gt", "<cmd>GoAddTag<CR>", {desc = "Add Tag", silent = true})
+set("n", "gm", "<cmd>GoRmTag<CR>", {desc = "Add Tag", silent = true})
 
 -- Tree
 set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true })
@@ -88,11 +99,11 @@ set('n', '<C-j>', ':move .+1<CR>', { noremap = true, silent = true })
 set('v', '<C-j>', ":move '>+1<CR>gv=gv", { noremap = true, silent = true })
 set('n', '<C-k>', ':move .-2<CR>', { noremap = true, silent = true })
 set('v', '<C-k>', ":move '<-2<CR>gv=gv", { noremap = true, silent = true })
--- Go NVIM packages 
+-- Go NVIM packages
 set('n', 'sm', ':GoModTidy<CR>', { desc = 'Run GoModTidy' })
 -- go get - sd
 
--- SCRIPTS 
+-- SCRIPTS
 set('n', 'ss', function()
   goget()
 end)
