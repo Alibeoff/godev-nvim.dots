@@ -155,10 +155,7 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "go",
         callback = function()
-          vim.api.nvim_set_hl(0, "goBuiltins", { fg = "#f38ba8", italic = true })
-          vim.api.nvim_set_hl(0, "goFunctionCall", { fg = "#89b4fa" })
-          vim.api.nvim_set_hl(0, "goType", { fg = "#f9e2af" })
-          vim.api.nvim_set_hl(0, "goStructDef", { fg = "#fab387" })
+          vim.treesitter.start() 
         end,
       })
     end)
