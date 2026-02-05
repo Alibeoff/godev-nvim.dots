@@ -77,24 +77,24 @@ At the moment, having looked at and tried personal NeoVim configs for developmen
 | `ss`           | Auto install Go package in focus              |
 | `;s`           | Telescope to run your Go files                |
 | `sr`           | Rename word throughout all project            |
+| `[[`           | Prev symbol                                   |
+| `]]`           | Nex symbol                                    |
 
 ---
 
-## Symbols Outline Group
+## Aerial Group
 
 | Action           | Shortcut(s)                |
 |------------------|----------------------------|
 | Go to location   | `<CR>`, `ll`               |
 | Close            | `<Esc>`, `q`               |
 | Open / Hide      | `sl`                       |
-| Focus location   | `o`                        |
-| Hover symbol     | `<C-space>`                |
+| Hide subgroup    | `o`                        |
+| Hover symbol     | `<S-space>`                |
 | Toggle preview   | `K`                        |
-| Rename symbol    | `r`                        |
-| Code actions     | `a`                        |
 | Fold             | `h`                        |
 | Unfold           | `l`                        |
 | Fold all         | `W`                        |
 | Unfold all       | `E`                        |
-| Fold reset       | `R`                        |
+
 ---

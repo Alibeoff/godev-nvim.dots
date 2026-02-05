@@ -109,7 +109,7 @@ return {
         ["W"] = "actions.tree_close_all",
         ["E"] = "actions.tree_open_all",
         ["K"] = "actions.toggle_preview",
-        ["<C-space>"] = "actions.hover",
+        ["<S-space>"] = "actions.hover",
         ["?"] = "actions.show_help",
         ["q"] = "actions.close",
         ["<Esc>"] = "actions.close",
