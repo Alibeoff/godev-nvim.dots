@@ -17,7 +17,7 @@ vim.opt.wrap = false
 vim.wo.relativenumber = true
 
 vim.opt.scrolloff = 4
-vim.opt.sidescrolloff = 4        
+vim.opt.sidescrolloff = 4
 
 vim.o.expandtab = true
 vim.o.shiftwidth = 2
@@ -46,7 +46,7 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
---auto organizer imports 
+--auto organizer imports
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '*.go',
   callback = function()
@@ -60,3 +60,19 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   end,
 })
 
+
+vim.lsp.config("gopls", {
+  settings = {
+    gopls = {
+      hints = {
+        rangeVariableTypes = true,
+        parameterNames = true,
+        constantValues = true,
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        functionTypeParameters = true,
+      },
+    },
+  },
+})

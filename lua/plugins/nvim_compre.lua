@@ -12,7 +12,7 @@ return {
     -- Настройка nvim-cmp
     local cmp = require('cmp')
     cmp.setup({
-        sources = {
+      sources = {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
         { name = 'path' },
