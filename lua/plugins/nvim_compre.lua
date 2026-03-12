@@ -16,6 +16,7 @@ return {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
         { name = 'path' },
+        { name = "luasnip" },
         { name = 'nvim_lsp_signature_help' },
       },
       mapping = {
@@ -48,7 +49,7 @@ return {
           end
         end, { 'i', 's' }),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['ll'] = cmp.mapping(function()
+        ['kk'] = cmp.mapping(function()
           if not cmp.visible() then
             cmp.complete()
           end
