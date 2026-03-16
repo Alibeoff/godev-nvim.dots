@@ -2,7 +2,7 @@
 At the moment, having looked at and tried personal NeoVim configs for development in the Go language published by YouTubers in GitHub, there is no immediately convenient working config that meets my needs. That is why below is a description of my personal config for working with Golang
 
 ## Installation pakcages
-### Catppuccin
+## Catppuccin
 To use this config with beautiful code highlighting, I use catppuccin. I don't like the new version, so I'll leave my catppuccin here just in case. To use it, unzip the zip file, then enter the command ```bash
 mv catppuccin ~/.local/share/nvim/lazy/catppuccin
 ```
@@ -10,6 +10,8 @@ then run neovim
 ```bash
 nvim .
 ```
+## Copilot-vim: To use copilot-vim, you need to install it in your system. [All instructions here](https://github.com/github/copilot.vim)
+P.S.: Don't working in Russia, you need to use VPN to use it.
 
 
 ### LazyGit - to use LazyGit on nvim you need install it in your system.
@@ -93,7 +95,13 @@ nvim .
 | `sr`           | Rename word throughout all project            |
 | `[[`           | Prev symbol                                   |
 | `]]`           | Nex symbol                                    |
+---
 
+## Copilot
+| Shortcut       | Mode   | Description                 |
+|----------------|--------|-----------------------------|
+| `<CR>`         | Insert | Accept Copilot suggestion   |
+| `<C-]>`        | Insert | Dismiss Copilot suggestion  |
 ---
 
 ## Aerial Group

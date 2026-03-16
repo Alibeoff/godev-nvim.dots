@@ -10,6 +10,10 @@ return {
       filters = {
         dotfiles = true, -- скрывать файлы и папки с точкой в начале
       },
+      git = {
+        enable = true,    -- Убедитесь, что git интеграция включена (по умолчанию true)
+        ignore = false,   -- !!! ГЛАВНОЕ: Показывать файлы, игнорируемые git'ом
+      },
       actions = {
         open_file = {
           quit_on_open = true, -- закрывать после открытия файла
@@ -42,8 +46,8 @@ return {
         vim.keymap.set("n", "hh", function()
           api.node.navigate.parent_close()
         end, { buffer = args.buf, noremap = true, silent = true })
-        
-                -- . - переключить показ скрытых файлов
+
+        -- . - переключить показ скрытых файлов
         vim.keymap.set("n", ",", function()
           api.tree.change_root_to_node(api.tree.get_node_under_cursor())
         end, { buffer = args.buf, noremap = true, silent = true })
