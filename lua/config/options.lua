@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '*.go',
   callback = function()
     -- Сначала форматируем файл (по желанию, можно убрать)
-    vim.lsp.buf.format({ async = false })
+    vim.lsp.buf.format({ async = false, timeout_ms = 1200 })
     -- Затем организуем импорты
     vim.lsp.buf.code_action({
       context = { only = { 'source.organizeImports' } },
@@ -77,3 +77,13 @@ vim.lsp.config("gopls", {
     },
   },
 })
+
+local original_notify = vim.notify
+vim.notify = function(msg, level, opts)
+  -- Игнорируем только сообщение "No code actions available"
+  if msg and msg:find("No code actions available") then
+    return
+  end
+  -- Все остальные сообщения показываем как обычно
+  original_notify(msg, level, opts)
+end

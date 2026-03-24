@@ -20,7 +20,9 @@ set("v", "<leader>/", "gc", {desc = "Comment lines", remap = true})
 -- Normal Mode
 set("i", "jj", "<Esc>", { noremap = true, silent = true })
 
-set("n", "<leader>w", function()
+set("n", "<leader>w", "<cmd>w<CR>", { noremap = true, silent = true })
+
+set("n", "<leader>rw", function()
   -- Сначала сохраняем файл
   vim.cmd("w")
   local filetype = vim.bo.filetype
