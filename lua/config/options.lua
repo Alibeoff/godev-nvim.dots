@@ -87,3 +87,28 @@ vim.notify = function(msg, level, opts)
   -- Все остальные сообщения показываем как обычно
   original_notify(msg, level, opts)
 end
+
+vim.api.nvim_create_autocmd("BufDelete", {
+  callback = function()
+    vim.schedule(function()
+      local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+
+      if #buffers == 1 and buffers[1].name == "" then
+        require("telescope.builtin").find_files()
+        -- require("snacks.dashboard").open()
+      end
+    end)
+  end,
+})
+
+vim.api.nvim_create_autocmd("WinClosed", {
+  callback = function()
+    vim.schedule(function()
+      for _, buf in ipairs(vim.fn.getbufinfo({ buflisted = 1 })) do
+        if buf.name == "" then
+          vim.api.nvim_buf_delete(buf.bufnr, { force = true })
+        end
+      end
+    end)
+  end,
+})
