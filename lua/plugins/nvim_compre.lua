@@ -14,7 +14,6 @@ return {
     cmp.setup({
       sources = {
         { name = 'nvim_lsp' },
-        { name = 'buffer' },
         { name = 'path' },
         { name = "luasnip" },
         { name = 'nvim_lsp_signature_help' },
@@ -48,7 +47,17 @@ return {
             fallback()
           end
         end, { 'i', 's' }),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<CR>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            if cmp.get_selected_entry() then
+              cmp.confirm()  -- Подтверждаем только если что-то выбрано
+            else
+              fallback()  -- Обычный Enter если ничего не выбрано
+            end
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
         ['kk'] = cmp.mapping(function()
           if not cmp.visible() then
             cmp.complete()
@@ -61,9 +70,12 @@ return {
           maxwidth = 50,
           ellipsis_char = '...',
         })
-      }
+      },
+      completion = {
+        completeopt = 'menu,menuone,noinsert,noselect',  -- Важно: noselect означает что ничего не выбрано по умолчанию
+        keyword_length = 1,
+      },
     })
-
     -- Опционально: настройка go.nvim для Go-разработки
     require('go').setup({
       auto_format = true,

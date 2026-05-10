@@ -10,7 +10,6 @@ return {
           spacing = 6, -- табуляция перед текстом ошибки
         },
       })
-
       vim.keymap.set("n", "sa", function()
         vim.lsp.buf.code_action({ filters = { include = { "source.addImport", "source.OrganizeImports" }, } })
       end, { desc = "Go: Organize Imports" })
